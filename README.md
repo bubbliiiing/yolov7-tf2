@@ -1,4 +1,4 @@
-## YOLOV5：You Only Look Once目标检测模型在tf2当中的实现（edition v6.1 in Ultralytics）
+## YOLOV7：You Only Look Once目标检测模型在tf2当中的实现
 ---
 
 ## 目录
@@ -13,7 +13,7 @@
 9. [参考资料 Reference](#Reference)
 
 ## Top News
-**`2022-05`**:**仓库创建，支持不同尺寸模型训练，分别为n、s、m、l、x版本的yolov5、支持step、cos学习率下降法、支持adam、sgd优化器选择、支持学习率根据batch_size自适应调整、新增图片裁剪、支持多GPU训练、支持各个种类目标数量计算、支持heatmap、支持EMA。**  
+**`2022-09`**:**仓库创建，支持不同尺寸模型训练，支持step、cos学习率下降法、支持adam、sgd优化器选择、支持学习率根据batch_size自适应调整、新增图片裁剪、支持多GPU训练、支持各个种类目标数量计算、支持heatmap。**  
 
 ## 相关仓库
 | 模型 | 路径 |
@@ -26,23 +26,21 @@ Mobilenet-Yolov4 | https://github.com/bubbliiiing/mobilenet-yolov4-tf2
 YoloV5-V5.0 | https://github.com/bubbliiiing/yolov5-tf2
 YoloV5-V6.1 | https://github.com/bubbliiiing/yolov5-v6.1-tf2
 YoloX | https://github.com/bubbliiiing/yolox-tf2
+Yolov7 | https://github.com/bubbliiiing/yolov7-tf2
 
 ## 性能情况
 | 训练数据集 | 权值文件名称 | 测试数据集 | 输入图片大小 | mAP 0.5:0.95 | mAP 0.5 |
 | :-----: | :-----: | :------: | :------: | :------: | :-----: |
-| COCO-Train2017 | [yolov5_n_v6.1.h5](https://github.com/bubbliiiing/yolov5-v6.1-tf2/releases/download/v1.0/yolov5_n_v6.1.h5) | COCO-Val2017 | 640x640 | 28.0 | 45.7
-| COCO-Train2017 | [yolov5_s_v6.1.h5](https://github.com/bubbliiiing/yolov5-v6.1-tf2/releases/download/v1.0/yolov5_s_v6.1.h5) | COCO-Val2017 | 640x640 | 37.5 | 56.8
-| COCO-Train2017 | [yolov5_m_v6.1.h5](https://github.com/bubbliiiing/yolov5-v6.1-tf2/releases/download/v1.0/yolov5_m_v6.1.h5) | COCO-Val2017 | 640x640 | 45.4 | 64.1
-| COCO-Train2017 | [yolov5_l_v6.1.h5](https://github.com/bubbliiiing/yolov5-v6.1-tf2/releases/download/v1.0/yolov5_l_v6.1.h5) | COCO-Val2017 | 640x640 | 49.0 | 67.3
-| COCO-Train2017 | [yolov5_x_v6.1.h5](https://github.com/bubbliiiing/yolov5-v6.1-tf2/releases/download/v1.0/yolov5_x_v6.1.h5) | COCO-Val2017 | 640x640 | 50.7 | 68.9
+| COCO-Train2017 | [yolov7_weights.pth](https://github.com/bubbliiiing/yolov7-tf2/releases/download/v1.0/yolov7_weights.h5) | COCO-Val2017 | 640x640 | 50.7 | 69.2
+| COCO-Train2017 | [yolov7_x_weights.pth](https://github.com/bubbliiiing/yolov7-tf2/releases/download/v1.0/yolov7_x_weights.h5) | COCO-Val2017 | 640x640 | 52.4 | 70.5
 
 ## 所需环境
 tensorflow-gpu==2.2.0
 
 ## 文件下载
 训练所需的权值可在百度网盘中下载。  
-链接: https://pan.baidu.com/s/1_tSJWb6drbsdbuLhuP2LFQ     
-提取码: 9564     
+链接: https://pan.baidu.com/s/1xmk6MDH-9Ug8GG3CYCFLrg     
+提取码: pg4c    
 
 VOC数据集下载地址如下，里面已经包括了训练集、测试集、验证集（与测试集一样），无需再次划分：  
 链接: https://pan.baidu.com/s/19Mw2u_df_nBzsC2lg20fQA    
@@ -114,7 +112,7 @@ _defaults = {
     #   验证集损失较低不代表mAP较高，仅代表该权值在验证集上泛化性能较好。
     #   如果出现shape不匹配，同时要注意训练时的model_path和classes_path参数的修改
     #--------------------------------------------------------------------------#
-    "model_path"        : 'model_data/yolov5_s.h5',
+    "model_path"        : 'model_data/yolov7_weights.pth',
     "classes_path"      : 'model_data/coco_classes.txt',
     #---------------------------------------------------------------------#
     #   anchors_path代表先验框对应的txt文件，一般不修改。
@@ -126,10 +124,12 @@ _defaults = {
     #   输入图片的大小，必须为32的倍数。
     #---------------------------------------------------------------------#
     "input_shape"       : [640, 640],
-    #---------------------------------------------------------------------#
-    #   所使用的YoloV5的版本。s、m、l、x
-    #---------------------------------------------------------------------#
-    "phi"               : 's',
+    #------------------------------------------------------#
+    #   所使用到的yolov7的版本，本仓库一共提供两个：
+    #   l : 对应yolov7
+    #   x : 对应yolov7_x
+    #------------------------------------------------------#
+    "phi"               : 'l',
     #---------------------------------------------------------------------#
     #   只有得分大于置信度的预测框会被保留下来
     #---------------------------------------------------------------------#
@@ -138,10 +138,6 @@ _defaults = {
     #   非极大抑制所用到的nms_iou大小
     #---------------------------------------------------------------------#
     "nms_iou"           : 0.3,
-    #---------------------------------------------------------------------#
-    #   最大框的数量
-    #---------------------------------------------------------------------#
-    "max_boxes"         : 100,
     #---------------------------------------------------------------------#
     #   该变量用于控制是否使用letterbox_image对输入图像进行不失真的resize，
     #   在多次测试后，发现关闭letterbox_image直接resize的效果更好
@@ -169,7 +165,4 @@ img/street.jpg
 5. 运行get_map.py即可获得评估结果，评估结果会保存在map_out文件夹中。
 
 ## Reference
-https://github.com/qqwweee/keras-yolo3/  
-https://github.com/Cartucho/mAP  
-https://github.com/Ma-Dan/keras-yolo4  
-https://github.com/ultralytics/yolov5
+https://github.com/WongKinYiu/yolov7
