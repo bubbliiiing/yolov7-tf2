@@ -31,8 +31,8 @@ Yolov7 | https://github.com/bubbliiiing/yolov7-tf2
 ## 性能情况
 | 训练数据集 | 权值文件名称 | 测试数据集 | 输入图片大小 | mAP 0.5:0.95 | mAP 0.5 |
 | :-----: | :-----: | :------: | :------: | :------: | :-----: |
-| COCO-Train2017 | [yolov7_weights.pth](https://github.com/bubbliiiing/yolov7-tf2/releases/download/v1.0/yolov7_weights.h5) | COCO-Val2017 | 640x640 | 50.7 | 69.2
-| COCO-Train2017 | [yolov7_x_weights.pth](https://github.com/bubbliiiing/yolov7-tf2/releases/download/v1.0/yolov7_x_weights.h5) | COCO-Val2017 | 640x640 | 52.4 | 70.5
+| COCO-Train2017 | [yolov7_weights.pth](https://github.com/bubbliiiing/yolov7-tf2/releases/download/v1.0/yolov7_weights.h5) | COCO-Val2017 | 640x640 | 51.0 | 69.6
+| COCO-Train2017 | [yolov7_x_weights.pth](https://github.com/bubbliiiing/yolov7-tf2/releases/download/v1.0/yolov7_x_weights.h5) | COCO-Val2017 | 640x640 | 52.7 | 71.0
 
 ## 所需环境
 tensorflow-gpu==2.2.0
