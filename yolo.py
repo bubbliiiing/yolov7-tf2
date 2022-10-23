@@ -102,7 +102,7 @@ class YOLO(object):
         
         self.model = yolo_body([None, None, 3], self.anchors_mask, self.num_classes, self.phi)
         self.model.load_weights(self.model_path, by_name=True)
-        self.model.save_weights(self.model_path)
+        
         if self.phi == "l":
             fuse_layers = [
                 ["rep_conv_1", False, True],
