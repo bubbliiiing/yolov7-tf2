@@ -362,8 +362,8 @@ if __name__ == "__main__":
             end_epoch       = UnFreeze_Epoch
             UnFreeze_flag   = False
 
-            gen     = tf.data.Dataset.from_generator(partial(train_dataloader.generate), (tf.float32, tf.float32, tf.float32, tf.float32))
-            gen_val = tf.data.Dataset.from_generator(partial(val_dataloader.generate), (tf.float32, tf.float32, tf.float32, tf.float32))
+            gen     = tf.data.Dataset.from_generator(partial(train_dataloader.generate), (tf.float32, tf.float32, tf.float32, tf.float32, tf.float32))
+            gen_val = tf.data.Dataset.from_generator(partial(val_dataloader.generate), (tf.float32, tf.float32, tf.float32, tf.float32, tf.float32))
 
             gen     = gen.shuffle(buffer_size = batch_size).prefetch(buffer_size = batch_size)
             gen_val = gen_val.shuffle(buffer_size = batch_size).prefetch(buffer_size = batch_size)
@@ -413,8 +413,8 @@ if __name__ == "__main__":
                     train_dataloader.batch_size    = batch_size
                     val_dataloader.batch_size      = batch_size
 
-                    gen     = tf.data.Dataset.from_generator(partial(train_dataloader.generate), (tf.float32, tf.float32, tf.float32, tf.float32))
-                    gen_val = tf.data.Dataset.from_generator(partial(val_dataloader.generate), (tf.float32, tf.float32, tf.float32, tf.float32))
+                    gen     = tf.data.Dataset.from_generator(partial(train_dataloader.generate), (tf.float32, tf.float32, tf.float32, tf.float32, tf.float32))
+                    gen_val = tf.data.Dataset.from_generator(partial(val_dataloader.generate), (tf.float32, tf.float32, tf.float32, tf.float32, tf.float32))
 
                     gen     = gen.shuffle(buffer_size = batch_size).prefetch(buffer_size = batch_size)
                     gen_val = gen_val.shuffle(buffer_size = batch_size).prefetch(buffer_size = batch_size)

@@ -89,8 +89,8 @@ def fit_one_epoch(net, loss_history, eval_callback, optimizer, epoch, epoch_step
         for iteration, batch in enumerate(gen):
             if iteration >= epoch_step:
                 break
-            images, target0, target1, target2 = batch[0], batch[1], batch[2], batch[3]
-            targets     = [target0, target1, target2]
+            images, target0, target1, target2, labels = batch[0], batch[1], batch[2], batch[3], batch[4]
+            targets     = [target0, target1, target2, labels]
             loss_value  = train_step(images, targets, net, optimizer)
             loss        = loss + loss_value
 
@@ -104,8 +104,8 @@ def fit_one_epoch(net, loss_history, eval_callback, optimizer, epoch, epoch_step
         for iteration, batch in enumerate(gen_val):
             if iteration >= epoch_step_val:
                 break
-            images, target0, target1, target2 = batch[0], batch[1], batch[2], batch[3]
-            targets     = [target0, target1, target2]
+            images, target0, target1, target2, labels = batch[0], batch[1], batch[2], batch[3], batch[4]
+            targets     = [target0, target1, target2, labels]
             loss_value  = val_step(images, targets, net, optimizer)
             val_loss    = val_loss + loss_value
 
