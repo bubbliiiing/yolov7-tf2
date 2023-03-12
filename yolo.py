@@ -1,6 +1,5 @@
 import colorsys
 import os
-import tf2onnx
 import time
 import cv2
 import gc
@@ -314,6 +313,7 @@ class YOLO(object):
         
     def convert_to_onnx(self, simplify, model_path):
         import onnx
+        import tf2onnx
         spec = (tf.TensorSpec((None, *self.input_shape, 3), tf.float32, name="input"),)
         tf2onnx.convert.from_keras(self.model, input_signature=spec, opset=13, output_path=model_path)
 
